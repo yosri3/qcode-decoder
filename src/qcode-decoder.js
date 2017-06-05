@@ -1,6 +1,6 @@
 (function (root, factory) {
   if (typeof define === 'function' && define.amd)
-    define(['qrcode'], factory);
+    define(['../build/qrcode'], factory);
   else if (typeof exports === 'object')
     module.exports = factory(require('../build/qrcode'));
   else root.QCodeDecoder = factory(qrcode);
@@ -18,7 +18,7 @@ function QCodeDecoder () {
   this.timerCapture = null;
   this.canvasElem = null;
   this.stream = null;
-  this.videoConstraints = {video: true, audio: false};
+  this.videoConstraints = {video: {facingMode: "environment"}, audio: false};
 }
 
 /**
@@ -178,7 +178,7 @@ QCodeDecoder.prototype.decodeFromImage = function (img, cb) {
  */
 QCodeDecoder.prototype.stop = function() {
   if (this.stream) {
-    this.stream.stop();
+    this.stream.getTracks()[0].stop();
     this.stream = undefined;
   }
 
