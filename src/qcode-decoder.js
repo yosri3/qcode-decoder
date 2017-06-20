@@ -1,6 +1,7 @@
 //PWA version
 (function (root, factory) {
   if (typeof define === 'function' && define.amd)
+//-----------------------------------alteration-----------------------------------
     define(['../build/qrcode'], factory);
   else if (typeof exports === 'object')
     module.exports = factory(require('../build/qrcode'));
@@ -19,6 +20,7 @@ function QCodeDecoder () {
   this.timerCapture = null;
   this.canvasElem = null;
   this.stream = null;
+//-----------------------------------alteration-----------------------------------
   this.videoConstraints = {video: {facingMode: "environment"}, audio: false};
 }
 
@@ -179,6 +181,7 @@ QCodeDecoder.prototype.decodeFromImage = function (img, cb) {
  */
 QCodeDecoder.prototype.stop = function() {
   if (this.stream) {
+//-----------------------------------alteration-----------------------------------
     this.stream.getTracks()[0].stop();
     this.stream = undefined;
   }
